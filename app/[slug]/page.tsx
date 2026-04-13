@@ -1,50 +1,5 @@
-/*// app/[slug]/page.tsx
-async function getPage(slug: string) {
-  const res = await fetch("https://griffinheadlesscms.kinsta.cloud/graphql", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `
-        query GetPage($slug: ID!) {
-          page(id: $slug, idType: URI) {
-            title
-            content
-          }
-        }
-      `,
-      variables: { slug },
-    }),
-    cache: "no-store",
-  });
+import { notFound } from "next/navigation";
 
-  const json = await res.json();
-  return json?.data?.page || null; // safely handle undefined
-}
-
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = await params; // unwrap the Promise
-
-  const page = await getPage(slug);
-
-  if (!page) {
-    return (
-      <main style={{ padding: "40px", textAlign: "center" }}>
-        <h1>404 - Page not found</h1>
-        <p>No page found for slug: {slug}</p>
-      </main>
-    );
-  }
-
-  return (
-    <main style={{ maxWidth: "800px", margin: "0 auto", padding: "40px" }}>
-      <h1>{page.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: page.content }} />
-    </main>
-  );
-}*/
-
-
-// app/[slug]/page.tsx
 async function getPage(slug: string) {
   const res = await fetch("https://griffinheadlesscms.kinsta.cloud/graphql", {
     method: "POST",
@@ -72,7 +27,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const page = await getPage(slug);
 
   if (!page) {
-    return <div className="container">Page not found</div>;
+    /* 404 Template: /app/not-found.tsx */
+    notFound();
   }
 
   return (
@@ -85,4 +41,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
       />
     </article>
   );
+}
+
+/* Pages Dynamic SEO Title */
+export async function generateMetadata({ params }: any) {
+  const { slug } = await params;
+
+  const page = await getPage(slug);
+
+  return {
+    title: page?.title || "Page",
+  };
 }

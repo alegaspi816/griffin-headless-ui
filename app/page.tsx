@@ -1,72 +1,3 @@
-/*export default async function Home() {
-  const res = await fetch("https://griffinheadlesscms.kinsta.cloud/wp-json/wp/v2/pages", {
-    cache: "no-store",
-  });
-  const data = await res.json();
-
-  return (
-    <div>
-      <h1>Griffin Headless Site</h1>
-      {data.map((page: any) => (
-        <div key={page.id}>
-          <h2 dangerouslySetInnerHTML={{ __html: page.title.rendered }} />
-        </div>
-      ))}
-    </div>
-  );
-}*/
-
-/* ******************************************************************************** */
-
-/*
-import Link from "next/link";
-
-async function getPages() {
-  const res = await fetch("https://griffinheadlesscms.kinsta.cloud/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `
-        {
-          pages {
-            nodes {
-              id
-              title
-              slug
-            }
-          }
-        }
-      `,
-    }),
-    cache: "no-store",
-  });
-
-  const json = await res.json();
-  return json.data.pages.nodes;
-}
-
-export default async function Home() {
-  const pages = await getPages();
-
-  return (
-    <main style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
-      <h1>Griffin Headless Site</h1>
-
-      {pages.map((page: any) => (
-        <div key={page.id} style={{ marginBottom: "15px" }}>
-          <Link href={`/${page.slug}`}>
-            <h2 style={{ cursor: "pointer", color: "blue" }}>
-              {page.title}
-            </h2>
-          </Link>
-        </div>
-      ))}
-    </main>
-  );
-}*/
-
 import Link from "next/link";
 
 async function getPages() {
@@ -84,6 +15,12 @@ async function getPages() {
                 id
                 title
                 slug
+                featuredImage {
+                  node {
+                    sourceUrl
+                    altText
+                  }
+                }
               }
             }
           }
@@ -112,6 +49,16 @@ export default async function Home() {
 
   return (
     <div>
+      <section className="hero">
+        <div className="home-banner">
+          <h1>Justice for the Injured.<br/>Compassion for Our Clients.</h1>
+          <p>When an accident turns your world upside down, you need more than just a lawyer—you need an advocate.
+Griffin Law, PLC is a leading personal injury firm dedicated to fighting for the rights of accident victims in Chandler, AZ.
+We handle the legal battle so you can focus on healing.</p>
+          <Link href="/contact-us" className="btn-primary">Free Consultation</Link>
+        </div>
+      </section>
+
       <h1 className="page-title">Pages</h1>
 
       {pages.length === 0 && (
@@ -123,6 +70,11 @@ export default async function Home() {
           <Link key={page.id} href={`/${page.slug}/`} className="card">
             <div className="card-content">
               <h2>{page.title}</h2>
+              {page.featuredImage?.node?.sourceUrl && (
+                <div className="card-image-container">
+                  <img src={page.featuredImage.node.sourceUrl} alt={page.featuredImage.node.altText} className="card-image" />
+                </div>
+              )}
             </div>
           </Link>
         ))}

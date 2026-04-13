@@ -33,20 +33,26 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 
 /* STYLES */
+
+h1, h2, h3 { font-family: var(--font-primary); }
+body { font-family: var(--font-secondary); }
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f5f5f5;
 }
+.logo-image {
+  height: 100px;
+  width: auto;
+  display: block;
+}
 /* layout */
 .container {
-  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -54,6 +60,7 @@ body {
 .header {
   background: var(--color-primary);
   color: #fff;
+  padding: 15px 0;
 }
 .header .container {
   display: flex;
@@ -66,6 +73,10 @@ header nav a {
   transition: 0.4s;
 }
 header nav a:hover{color: var(--color-orange);}
+
+.home-banner{padding: 0 50px;}
+.home-banner .btn-primary {margin-top: 15px;}
+
 /* footer */
 .footer {
   background: var(--color-primary);
@@ -123,4 +134,57 @@ header nav a:hover{color: var(--color-orange);}
 
 .content p {
   line-height: 1.6;
+}
+.not-found-page {color: #000;}
+
+/* Hero Section */
+.hero {
+  background: var(--color-primary);
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+  border-radius: 0 0 40px 40px;
+  margin-bottom: 50px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  max-width: 800px;
+  margin: 0 auto 20px;
+}
+
+/* Modernized Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+  border-color: var(--color-orange);
+}
+
+.btn-primary {
+  background: var(--color-orange);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: 0.4s;
+}
+.btn-primary:hover{
+  background: #fff;
+  color: var(--color-primary);
 }
