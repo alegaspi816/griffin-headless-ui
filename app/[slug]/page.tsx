@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { fetchGraphQL } from "../../lib/api";
 
 async function getPage(slug: string) {
   const res = await fetch("https://griffinheadlesscms.kinsta.cloud/graphql", {

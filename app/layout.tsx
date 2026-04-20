@@ -1,57 +1,141 @@
+// import "./globals.css";
+// import Header from "@/components/Header";
+// import Footer from "@/components/Footer";
+// import { fetchGraphQL } from "@/lib/api";
+
+// function buildMenuTree(nodes: any[]) {
+//   const map = new Map();
+//   const roots: any[] = [];
+
+//   // Map all items
+//   nodes.forEach((item) => {
+//     map.set(item.databaseId, { ...item, children: [] });
+//   });
+
+//   // Assign children
+//   nodes.forEach((item) => {
+//     if (item.parentDatabaseId) {
+//       const parent = map.get(item.parentDatabaseId);
+//       if (parent) {
+//         parent.children.push(map.get(item.databaseId));
+//       }
+//     } else {
+//       roots.push(map.get(item.databaseId));
+//     }
+//   });
+
+//   return roots;
+// }
+
+// export default async function RootLayout({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   const data = await fetchGraphQL(`
+//     query GetHeaderMenu {
+//       menu(id: "header-navigation", idType: SLUG) {
+//         menuItems(first: 100) {
+//           nodes {
+//             id
+//             label
+//             uri
+//             databaseId
+//             parentDatabaseId
+//           }
+//         }
+//       }
+//     }
+//   `);
+
+ 
+
+//   const allNodes = data?.menu?.menuItems?.nodes || [];
+//   const menuTree = buildMenuTree(allNodes);
+
+//   return (
+//     <html lang="en">
+//       <body>
+//         <Header menuItems={menuTree} />
+//         <main className="flex-grow">{children}</main>
+//         <Footer />
+//       </body>
+//     </html>
+//   );
+// }
+
 import "./globals.css";
-import Link from "next/link";
-import Image from 'next/image';
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { fetchGraphQL } from "@/lib/api";
 
-export const metadata = {
-  title: {
-    default: "Griffin Law, PLC",
-    template: "%s | Griffin Law, PLC",
-  },
-  description: "We understand that a personal injury case is more than just a file",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+function buildMenuTree(nodes: any[]) {
+  const map = new Map();
+  const roots: any[] = [];
 
-export default function RootLayout({
+  nodes.forEach((item) => {
+    map.set(item.databaseId, { ...item, children: [] });
+  });
+
+  nodes.forEach((item) => {
+    if (item.parentDatabaseId) {
+      const parent = map.get(item.parentDatabaseId);
+      if (parent) {
+        parent.children.push(map.get(item.databaseId));
+      }
+    } else {
+      roots.push(map.get(item.databaseId));
+    }
+  });
+
+  return roots;
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const data = await fetchGraphQL(`
+    query GetMenus {
+      header: menu(id: "header-navigation", idType: SLUG) {
+        menuItems(first: 100) {
+          nodes {
+            id
+            label
+            uri
+            databaseId
+            parentDatabaseId
+          }
+        }
+      }
+
+      footer: menu(id: "footer-navigation", idType: SLUG) {
+        menuItems(first: 100) {
+          nodes {
+            id
+            label
+            uri
+            databaseId
+            parentDatabaseId
+          }
+        }
+      }
+    }
+  `);
+
+  const headerNodes = data?.header?.menuItems?.nodes || [];
+  const footerNodes = data?.footer?.menuItems?.nodes || [];
+
+  const headerMenu = buildMenuTree(headerNodes);
+  const footerMenu = buildMenuTree(footerNodes);
+
   return (
     <html lang="en">
       <body>
-        {/* HEADER */}
-        <header className="header">
-          <div className="container">
-            <div className="logo">
-              <Link href="/">
-                <Image src="/griffin-plc.png" alt="Griffin Law, PLC" className="logo-image" width={150} height={50} priority />
-              </Link>
-            </div>
-            <nav>
-              <Link href="tel:1234567" className="btn-primary">FREE CONSULTATION</Link>
-            </nav>
-          </div>
-        </header>
-
-        {/* MAIN */}
-        <main className="container">{children}</main>
-
-        {/* FOOTER */}
-        <footer className="footer">
-          <div className="container">
-            <div className="footer-logo">
-              <Link href="/">
-                <Image src="/griffin-plc.png" alt="Griffin Law, PLC" className="logo-image" width={150} height={50} priority />
-              </Link>
-            </div>
-          </div>
-          <div className="container">
-            <p>© {new Date().getFullYear()} Griffin Law, PLC</p>
-          </div>
-        </footer>
+        <Header menuItems={headerMenu} />
+        <main className="flex-grow">{children}</main>
+        <Footer menuItems={footerMenu} />
       </body>
     </html>
   );
