@@ -145,83 +145,6 @@ header.header nav.fixed{
   background-color: var(--color-primary);
   color: #fff;
 }
-/* --- Desktop Styles (Hover) --- */
-@media (min-width: 992px) {
-  .dropdown-parent:hover .submenu-dropdown {
-    z-index: 1000;
-    width: 500px;
-    display: flex;
-    flex-wrap: wrap;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    box-shadow: 0px -4px 11px 4px #ffffff1a;
-  }
-  .dropdown-parent:hover .submenu-dropdown li {flex: 50%;}
-  header nav .menu{display: flex;}
-  .header nav .header-menu-sidecollapse .dropdown-parent .flex{gap: 10px;}
-}
-@media (max-width: 991px) {
-  .header nav .header-menu-sidecollapse {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 73%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    z-index: 100;
-    background-color: var(--color-primary);;
-    color: #fff;
-    transition: all 0.5s ease-in-out;
-    text-transform: uppercase;
-    font-size: 24px;
-    padding: 70px 15px 0;
-  }
-  .close-menu, .open-menu {display: block;}
-  .close-menu svg {width: 25px;}
-  #check:checked ~ .menu {right: -1px;}
-  .header nav .open-menu svg {width: 25px;}
-  .header nav .open-menu svg path{fill:#fff;}
-
-
-
- 
-
-  .dropdown-parent input[type="checkbox"]:checked ~ .submenu-dropdown {
-    display: block;
-    padding-left: 20px;
-    width: 100%;
-  }
-  .dropdown-parent input[type="checkbox"]:checked ~ .submenu-dropdown li a {color: var(--color-primary); }
-  /* Rotate the chevron when checked */
-  .dropdown-parent input[type="checkbox"]:checked ~ .flex .chevron-icon svg {transform: rotate(180deg);}
-
-
-  .submenu-dropdown {
-    position: static;
-    box-shadow: none;
-  }
-  .header nav .header-menu-sidecollapse .chevron-icon svg {
-    width: 25px;
-    height: 25px;
-  }
-  .header nav .header-menu-sidecollapse .dropdown-parent .flex {justify-content: space-between;}
-  .header nav .menu.header-menu-sidecollapse > li {padding-left: 0;}
-  .header nav .menu.header-menu-sidecollapse > li a {
-    font-size: 1rem;
-    line-height: 1.2;
-    padding: 5px 0;
-  }
-  .header nav .menu.header-menu-sidecollapse > li.dropdown-parent {padding: 3.41px 0;}
-  .footer-upper {padding-top: 40px;}
-}
-
-
-
-
-
 
 .bg-overlay:after {
   content: "";
@@ -351,4 +274,81 @@ header.header nav.fixed{
   font-size: 3.5rem;
   max-width: 800px;
   margin: 0 auto 20px;
+}
+
+.inner-page p, .inner-page span {color: var(--color-muted);}
+
+/* --- Desktop Styles (Hover) --- */
+@media (min-width: 992px) {
+  .dropdown-parent:hover .submenu-dropdown {
+    z-index: 1000;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    box-shadow: 0px -4px 11px 4px #ffffff1a;
+  }
+  .dropdown-parent:hover .submenu-dropdown li {flex: 50%;}
+  header nav .menu{display: flex;}
+  .header nav .header-menu-sidecollapse .dropdown-parent .flex{gap: 10px;}
+}
+@media (max-width: 991px) {
+  .header nav .header-menu-sidecollapse {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 73%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index: 100;
+    background-color: var(--color-primary);;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+    text-transform: uppercase;
+    font-size: 24px;
+    padding: 70px 15px 0;
+  }
+  .close-menu, .open-menu {display: block;}
+  .close-menu svg {width: 25px;}
+  #check:checked ~ .menu {right: -1px;}
+  .header nav .open-menu svg {width: 25px;}
+  .header nav .open-menu svg path{fill:#fff;}
+
+
+
+ 
+
+  .dropdown-parent input[type="checkbox"]:checked ~ .submenu-dropdown {
+    display: block;
+    padding-left: 20px;
+    width: 100%;
+  }
+  .dropdown-parent input[type="checkbox"]:checked ~ .submenu-dropdown li a {color: var(--color-primary); }
+  /* Rotate the chevron when checked */
+  .dropdown-parent input[type="checkbox"]:checked ~ .flex .chevron-icon svg {transform: rotate(180deg);}
+
+
+  .submenu-dropdown {
+    position: static;
+    box-shadow: none;
+  }
+  .header nav .header-menu-sidecollapse .chevron-icon svg {
+    width: 25px;
+    height: 25px;
+  }
+  .header nav .header-menu-sidecollapse .dropdown-parent .flex {justify-content: space-between;}
+  .header nav .menu.header-menu-sidecollapse > li {padding-left: 0;}
+  .header nav .menu.header-menu-sidecollapse > li a {
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 5px 0;
+  }
+  .header nav .menu.header-menu-sidecollapse > li.dropdown-parent {padding: 3.41px 0;}
+  .footer-upper {padding-top: 40px;}
+  .home-banner-title {font-size: calc(1.525rem + 3.3vw);}
+  .home-banner-cont{padding: 0 15px;}
 }

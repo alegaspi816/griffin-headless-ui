@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -20,35 +21,58 @@ export default function ContactForm() {
       message: formData.get("message"),
     };
 
-    const res = await fetch("/api/gravity-form", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
+    try {
+      const res = await fetch("/api/gravity-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    setLoading(false);
+      setLoading(false);
 
-    if (data.is_valid) {
-      setSuccess(true);
-    } else {
-      alert("Something went wrong");
+      if (data.is_valid) {
+        router.push("/thank-you/");
+        return;
+      }
+
+      alert("Something went wrong. Please try again.");
+    } catch (err) {
+      setLoading(false);
+      console.error(err);
+      alert("Server error. Please try again.");
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input name="firstName" placeholder="First Name" className="w-full p-3 rounded bg-white/20 text-white" required />
-      <input name="lastName" placeholder="Last Name" className="w-full p-3 rounded bg-white/20 text-white" required />
-      <input name="phone" placeholder="Phone" className="w-full p-3 rounded bg-white/20 text-white" required />
-      <input name="email" type="email" placeholder="Email" className="w-full p-3 rounded bg-white/20 text-white" required />
-      <textarea name="message" placeholder="Message" className="w-full p-3 rounded bg-white/20 text-white" required />
-      <button type="submit" className="bg-white text-black px-6 py-3 rounded w-full" disabled={loading}>{loading ? "Submitting..." : "Submit"}</button>
+  const inputClass = "w-full p-4 rounded-sm bg-white text-[#002e3b] font-bold uppercase placeholder:text-[#002e3b]/50 focus:outline-none";
 
-      {success && (
-        <p className="text-green-400 text-center">Form submitted successfully!</p>
-      )}
+return (
+    <form onSubmit={handleSubmit} className="max-w-5xl mx-auto space-y-4">
+      <div className="grid grid-cols-1 min-[992px]:grid-cols-2 gap-4">
+        
+        {/* First Name */}
+        <div className="relative"><input name="firstName" placeholder="FIRST NAME *" className={inputClass} required /></div>
+
+        {/* Last Name */}
+        <div className="relative"><input name="lastName" placeholder="LAST NAME *" className={inputClass} required /></div>
+
+        {/* Phone */}
+        <div className="relative"><input name="phone" placeholder="PHONE *" className={inputClass} required /></div>
+
+        {/* Email */}
+        <div className="relative"><input name="email" type="email" placeholder="EMAIL *" className={inputClass} required /></div>
+      </div>
+
+      {/* Message - Full Width */}
+      <div className="relative"><textarea name="message" placeholder="MESSAGE *" rows={5} className={`${inputClass} resize-none`} required /></div>
+
+      {/* Submit Button - Centered */}
+      <div className="flex justify-center pt-4">
+        <button type="submit" className="bg-[#ff8227] hover:bg-[#e67320] text-white font-bold py-4 px-16 cursor-pointer rounded-lg uppercase tracking-widest transition-colors w-full min-[992px]:w-auto min-w-[250px]" disabled={loading} >{loading ? "SUBMITTING..." : "SUBMIT"}</button>
+      </div>
     </form>
   );
 }
-

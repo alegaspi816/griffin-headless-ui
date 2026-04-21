@@ -1,56 +1,80 @@
 import { notFound } from "next/navigation";
-import { fetchGraphQL } from "../../lib/api";
+import Image from "next/image";
+import { fetchGraphQL } from "@/lib/api";
 
 async function getPage(slug: string) {
-  const res = await fetch("https://griffinheadlesscms.kinsta.cloud/graphql", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `
-        query GetPage($slug: ID!) {
-          page(id: $slug, idType: URI) {
-            title
-            content
+  const data = await fetchGraphQL(
+    `
+    query GetPage($uri: ID!) {
+      page(id: $uri, idType: URI) {
+        title
+        content
+        featuredImage {
+          node {
+            sourceUrl
+            altText
           }
         }
-      `,
-      variables: { slug },
-    }),
-    cache: "no-store",
-  });
+      }
+    }
+  `,
+    { uri: `/${slug}/` }
+  );
 
-  const json = await res.json();
-  return json?.data?.page || null;
+  return data?.page || null;
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+/**
+ * Default Page Template
+ */
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const page = await getPage(slug);
 
   if (!page) {
-    /* 404 Template: /app/not-found.tsx */
+    // 404 page
     notFound();
   }
 
   return (
-    <article className="article">
-      <h1>{page.title}</h1>
+    
+    <article className="inner-page article max-w-4xl mx-auto py-12 px-4">
+      {/* HEADER SECTION */}
+      <div className="mb-8">
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-4">{page.title}</h1>
+      </div>
 
-      <div
-        className="content"
-        dangerouslySetInnerHTML={{ __html: page.content }}
+      {/* FEATURED IMAGE */}
+      {page?.featuredImage?.node?.sourceUrl && (
+        <div className="mb-10 overflow-hidden rounded-lg shadow-lg">
+          <Image src={page.featuredImage.node.sourceUrl} alt={page.featuredImage.node.altText || page.title} width={1200} height={600} className="w-full h-auto object-cover" priority />
+        </div>
+      )}
+
+      {/* MAIN CONTENT */}
+      <div className="inner-page-content prose prose-lg max-w-none content" 
+        dangerouslySetInnerHTML={{ __html: page.content }} 
       />
     </article>
   );
 }
 
-/* Pages Dynamic SEO Title */
-export async function generateMetadata({ params }: any) {
+/**
+ * SEO Metadata
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-
   const page = await getPage(slug);
 
   return {
-    title: page?.title || "Page",
+    title: page ? `${page.title} | Your Site Name` : "Page Not Found",
   };
 }
