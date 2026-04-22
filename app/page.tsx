@@ -19,10 +19,9 @@ async function getHomePage() {
               target
             }
             bannerBackground {
-                cursor
                 node {
-                  link
-                }
+                sourceUrl
+              }
             }
           }
           homeFlexibleContent {
@@ -131,7 +130,7 @@ export default async function Home() {
     <div>
 
        {/* DISPLAYING THE BANNER FIELDS */}
-      <section className="home-banner relative isolate overflow-hidden bg-cover bg-center bg-overlay py-24 sm:py-32" style={{  backgroundImage: `url(${banner?.bannerBackground?.sourceUrl || '/arizona-skyline.jpg'})`  }}>
+      <section className="home-banner relative isolate overflow-hidden bg-cover bg-center bg-overlay py-24 sm:py-32" style={{  backgroundImage: `url(${banner?.bannerBackground?.node?.sourceUrl || 'https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2025/09/arizona-skyline-e1757520675891.jpg'})`  }}>
         <div className="home-banner-cont relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto lg:mx-0">
             
@@ -201,14 +200,12 @@ export default async function Home() {
             <div className="flex flex-wrap justify-center gap-6 mt-15 mb-10 md:mb-15">
               {paLayout.practiceAreasGrid?.nodes?.map((paPage: any) => {
                 
-                // --- 1. DEFINE VARIABLES HERE ---
                 const rc = paPage.relatedContentInterlinking;
                 const paExcerpt = paPage.practiceArea?.practiceAreasExcerpt;
                 
-                // This is the line that was likely missing or misplaced:
                 const templateBanner = paPage.template?.massTortTemplate?.bannerFieldsGroup?.bannerBackgroundImage;
 
-                // --- 2. APPLY FALLBACK LOGIC ---
+                // --- FALLBACK LOGIC ---
                 const cardTitle = rc?.tsegRcPostTitle || paPage.title;
 
                 const cardIcon = rc?.tsegRcPostIcon?.node?.sourceUrl || "https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2025/09/justice-sword.svg";

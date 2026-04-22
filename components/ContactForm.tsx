@@ -47,7 +47,7 @@ export default function ContactForm() {
     }
   };
 
-  const inputClass = "w-full p-4 rounded-sm bg-white text-[#002e3b] font-bold uppercase placeholder:text-[#002e3b]/50 focus:outline-none";
+  const inputClass = "w-full p-4 rounded-sm bg-white text-[#002e3b] font-bold placeholder:text-[#002e3b]/50 focus:outline-none";
 
 return (
     <form onSubmit={handleSubmit} className="max-w-5xl mx-auto space-y-4">
