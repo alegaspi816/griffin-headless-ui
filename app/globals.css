@@ -159,6 +159,10 @@ header.header nav.fixed{
 }
 .home-banner .btn-primary {margin-top: 15px;}
 .home-banner-cont {z-index: 1;}
+.banner-overlay {
+    background-color: #000;
+    opacity: 0.8;
+}
 .home-banner-pretitle {
   letter-spacing: 2px;
   font-size: 1.25rem;
@@ -178,6 +182,7 @@ header.header nav.fixed{
 .about-section .content {color: var(--color-muted);}
 
 .section-practice-areas{background-color: var(--color-primary);}
+.section-practice-areas .pa-card {height: 194px;}
 .section-practice-areas .title {
   font-family: var(--font-secondary);
   font-size: 2.5rem;
@@ -351,4 +356,12 @@ header.header nav.fixed{
   .footer-upper {padding-top: 40px;}
   .home-banner-title {font-size: calc(1.525rem + 3.3vw);}
   .home-banner-cont{padding: 0 15px;}
+}
+
+/* Inner pages */
+.banner-main {
+  min-height: 350px;
+}
+.banner-main .container {
+  z-index: 1;
 }

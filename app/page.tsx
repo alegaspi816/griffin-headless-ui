@@ -1,5 +1,6 @@
 import { fetchGraphQL } from "@/lib/api";
 import Link from 'next/link';
+import Image from 'next/image'
 import ContactForm from "@/components/ContactForm";
 
 async function getHomePage() {
@@ -128,53 +129,37 @@ export default async function Home() {
 
   return (
     <div>
-
-       {/* DISPLAYING THE BANNER FIELDS */}
-      <section className="home-banner relative isolate overflow-hidden bg-cover bg-center bg-overlay py-24 sm:py-32" style={{  backgroundImage: `url(${banner?.bannerBackground?.node?.sourceUrl || 'https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2025/09/arizona-skyline-e1757520675891.jpg'})`  }}>
+      {/* BANNER SECTION */}
+      <section className="home-banner relative isolate overflow-hidden bg-cover bg-center py-24 sm:py-32">
+        <Image src={banner?.bannerBackground?.node?.sourceUrl || 'https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2025/09/arizona-skyline-e1757520675891.jpg'} alt="Banner Background" fill priority className="object-cover -z-10" sizes="100vw" quality={75} />
+        <div className="banner-overlay absolute inset-0 bg-black/40"></div>
         <div className="home-banner-cont relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto lg:mx-0">
-            
             {banner.bannerPreTitle && (<p className="home-banner-pretitle font-bold mb-2 uppercase">{banner.bannerPreTitle}</p>)}
-
             {banner.bannerTitle && (<BannerTitleTag className="home-banner-title text-5xl font-semibold tracking-tight text-white sm:text-7xl" dangerouslySetInnerHTML={{ __html: banner.bannerTitle }} />)}
-
-            {/* Banner Content */}
             <div  className="home-banner-desc mt-8 text-lg max-w-2xl font-medium text-pretty text-white sm:text-xl/8" dangerouslySetInnerHTML={{ __html: banner?.bannerContent || "" }} /></div>
-
-          {/* Banner Link */}
           {banner?.bannerLink && (<Link href={banner.bannerLink.url} target={banner.bannerLink.target || '_self'} className="btn-primary uppercase inline-block mt-10">{banner.bannerLink.title}</Link>)}
         </div>
       </section>
 
-      {/* ABOUT SECTION (Conditional Rendering) */}
+      {/* ABOUT SECTION */}
       {aboutLayout && (
         <section className="about-section overflow-hidden pt-20 sm:pt-15">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
-
-              {/* TEXT CONTENT */}
               <div className="lg:col-span-6 xl:col-span-8 pb-6 lg:pb-0">
-                {/* Pre-Title */}
                 <span className="pre-title block text-xs font-bold uppercase tracking-widest mb-3">{aboutLayout.sectionPreTitle}</span>
-
-                {/* Heading (Dynamic H2 or Span) */}
                 <AboutTitleTag className="title text-3xl font-bold text-white mb-4">{aboutLayout.sectionTitle}</AboutTitleTag>
-
-                {/* Content */}
                 <div className="content space-y-4 text-base leading-relaxed" dangerouslySetInnerHTML={{ __html: aboutLayout.sectionContent || "" }} />
-
-                {/* CTA Link */}
                 {aboutLayout.sectionLink && (
                   <div className="mt-6">
                     <Link href={aboutLayout.sectionLink.url} target={aboutLayout.sectionLink.target || '_self'} className="inline-block btn-primary text-white px-6 py-3 font-semibold rounded transition hover:opacity-90">{aboutLayout.sectionLink.title}</Link>
                   </div>
                 )}
               </div>
-
-              {/* IMAGE */}
               <div className="lg:col-span-6 xl:col-span-4 flex justify-center lg:justify-end">
                 {aboutLayout.sectionImage?.node?.sourceUrl && (
-                  <img src={aboutLayout.sectionImage.node.sourceUrl} alt={aboutLayout.sectionImage.node.altText || "About Image"}  width={343} height={516} className="w-full max-w-sm h-auto" />
+                 <Image src={aboutLayout.sectionImage.node.sourceUrl} alt={aboutLayout.sectionImage.node.altText || "About Image"} width={343} height={516} className="rounded-lg object-cover" loading="lazy" />
                 )}
               </div>
 
@@ -190,24 +175,15 @@ export default async function Home() {
       {paLayout && (
         <section className="section-practice-areas py-16 bg-primary">
           <div className="mx-auto max-w-7xl px-4 text-center text-white">
-            
             {paLayout.sectionPreTitle && (<span className="pre-title block text-orange-500 text-xs font-bold uppercase tracking-widest mb-2">{paLayout.sectionPreTitle}</span>)}
-            
             {paLayout.sectionTitle && (<h2 className="title text-white text-3xl font-semibold mb-4">{paLayout.sectionTitle}</h2>)}
-
             {paLayout.sectionContent && (<div className="content text-white mb-10 max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: paLayout.sectionContent }} />)}
-
             <div className="flex flex-wrap justify-center gap-6 mt-15 mb-10 md:mb-15">
-              {paLayout.practiceAreasGrid?.nodes?.map((paPage: any) => {
-                
+              {paLayout.practiceAreasGrid?.nodes?.map((paPage: any, index: number) => {
                 const rc = paPage.relatedContentInterlinking;
                 const paExcerpt = paPage.practiceArea?.practiceAreasExcerpt;
-                
                 const templateBanner = paPage.template?.massTortTemplate?.bannerFieldsGroup?.bannerBackgroundImage;
-
-                // --- FALLBACK LOGIC ---
                 const cardTitle = rc?.tsegRcPostTitle || paPage.title;
-
                 const cardIcon = rc?.tsegRcPostIcon?.node?.sourceUrl || "https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2025/09/justice-sword.svg";
 
                 const cardImage = 
@@ -215,22 +191,17 @@ export default async function Home() {
                   templateBanner?.node?.sourceUrl || 
                   'https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2025/09/griffin-law-plc-social-image.jpg';
 
-                // --- 3. RETURN JSX ---
+                
                 return (
-                  <Link key={paPage.id} href={paPage.uri} className="pa-card block no-underline group w-full sm:w-[calc(50%-1.5rem)] xl:w-[calc(33.333%-1.5rem)]">
-                    <div className="flex flex-col gap-2 rounded overflow-hidden bg-cover bg-center relative shadow h-full py-6 md:py-10 px-4 transition-transform duration-300 group-hover:scale-[1.01]" style={{ backgroundImage: `url(${cardImage})` }}>
+                    <Link key={paPage.id} href={paPage.uri} className="pa-card group relative block h-[300px] w-full overflow-hidden rounded sm:w-[calc(50%-1.5rem)] xl:w-[calc(33.333%-1.5rem)] no-underline">
+                      <Image src={cardImage} alt={paPage.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" priority={index < 3} loading={index < 3 ? "eager" : "lazy"} />
                       <div className="absolute inset-0 bg-black/60 group-hover:bg-black/45 transition-colors"></div>
-
-                      <div className="relative z-10 flex flex-col h-full items-center text-center">
-
-                        <h3 className="pa-card-title text-xl font-bold text-white mb-3">{cardTitle}</h3>
-
+                      <div className="relative z-10 flex h-full flex-col items-center justify-center p-6 text-center">
+                        <h3 className="pa-card-title mb-4 text-xl font-bold text-white transition-transform duration-300 group-hover:-translate-y-1">{cardTitle}</h3>
                         {paExcerpt && (<p className="pa-card-excerpt text-sm text-gray-200 mb-8 line-clamp-3">{paExcerpt}</p>)}
-                        
-                        <span className="pa-card-link mt-auto inline-block border border-white text-white text-xs px-4 py-2 uppercase tracking-widest font-bold group-hover:bg-white group-hover:text-black transition-all">Learn More</span>
+                        <span className="pa-card-link inline-block border border-white px-5 py-2 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 group-hover:bg-white group-hover:text-black">Learn More</span>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
                 );
               })}
             </div>
@@ -241,8 +212,6 @@ export default async function Home() {
           </div>
         </section>
       )}
-
-
 
 
 
@@ -270,8 +239,6 @@ export default async function Home() {
         </div>
       </div>
     </section>
-
-
 
 
     </div>

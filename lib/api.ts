@@ -20,3 +20,12 @@ export async function fetchGraphQL(query: string, variables = {}) {
 
   return json.data;
 }
+
+export function mapBannerData(acf: any) {
+  return {
+    title: acf?.banner_title,
+    image: acf?.banner_image,
+    link: acf?.banner_link,
+    link2: acf?.banner_link_2,
+  };
+}

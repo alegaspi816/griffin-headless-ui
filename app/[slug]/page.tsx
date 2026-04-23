@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { fetchGraphQL } from "@/lib/api";
+import DefaultBanner from "@/components/InnerBanner";
+import { mapBannerData } from "@/lib/api";
 
 async function getPage(slug: string) {
   const data = await fetchGraphQL(
@@ -34,6 +36,7 @@ export default async function Page({
 }) {
   const { slug } = await params;
   const page = await getPage(slug);
+  const banner = mapBannerData(page.acf);
 
   if (!page) {
     // 404 page
@@ -41,7 +44,10 @@ export default async function Page({
   }
 
   return (
-    
+    <>
+    <DefaultBanner {...banner}
+        fallbackTitle={page.title}
+        type="page" />
     <article className="inner-page article max-w-4xl mx-auto py-12 px-4">
       {/* HEADER SECTION */}
       <div className="mb-8">
@@ -60,6 +66,8 @@ export default async function Page({
         dangerouslySetInnerHTML={{ __html: page.content }} 
       />
     </article>
+    </>
+
   );
 }
 
