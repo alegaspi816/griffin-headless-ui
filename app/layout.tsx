@@ -65,7 +65,7 @@ export default async function RootLayout({
   const footerMenu = buildMenuTree(footerNodes);
 
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body>
         <Header menuItems={headerMenu} />
         <main className="flex-grow">{children}</main>

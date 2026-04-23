@@ -42,40 +42,12 @@ export default function BannerDefault({
   return (
     <section
       className="banner-main bg-image bg-center bg-cover bg-no-repeat bg-overlay section-pt pb-5 relative"
-      style={{ backgroundImage: `url(${bannerImage})` }}
-    >
-      <div className="container relative">
-        <h1 className="banner-title text-white font-primary fw-normal h1 d-block">
-          {renderTitle()}
-        </h1>
-
+      style={{ backgroundImage: `url(${bannerImage})` }}>
+      <div className="container relative max-w-7xl">
+        <h1 className="banner-title text-white font-primary fw-normal h1 d-block">{renderTitle()}</h1>
         <div className="d-flex flex-row flex-wrap align-items-center gap-3 mt-5">
-          {link ? (
-            <a
-              href={link.url}
-              target={link.target || "_self"}
-              className="btn btn-primary"
-            >
-              {link.title}
-            </a>
-          ) : (
-            <a
-              href="#schedule-a-free-consultation"
-              className="btn btn-primary btn-arrow btn-arrow-light offset-anchor-link"
-            >
-              Free Consultation
-            </a>
-          )}
-
-          {link2 && (
-            <a
-              href={link2.url}
-              target={link2.target || "_self"}
-              className="btn btn-outline-primary"
-            >
-              {link2.title}
-            </a>
-          )}
+          {link ? (<a href={link.url} target={link.target || "_self"} className="btn btn-primary">{link.title}</a>) : (<a href="#footer-contact" className="btn btn-primary btn-arrow btn-arrow-light offset-anchor-link">Free Consultation</a>)}
+          {link2 && (<a href={link2.url} target={link2.target || "_self"} className="btn btn-outline-primary">{link2.title}</a>)}
         </div>
       </div>
     </section>

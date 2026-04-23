@@ -207,10 +207,7 @@ header.header nav.fixed{
 }
 
 /* footer */
-.footer {
-  color: #fff;
-  margin-top: 40px;
-}
+.footer {color: #fff;}
 .footer-upper{background-color: var(--color-dark);}
 .footer-bottom {background-color: var(--color-primary);}
 .footer .nav-title {
@@ -360,8 +357,31 @@ header.header nav.fixed{
 
 /* Inner pages */
 .banner-main {
-  min-height: 350px;
+  min-height: 269px;
+  padding-top: 60px;
 }
 .banner-main .container {
   z-index: 1;
+}
+.banner-title {
+  font-size: 2.5rem;
+}
+.inner-page-content *, .inner-page-content p a:hover, .inner-page-content ul > li > a:hover {color: var(--color-primary);}
+.inner-page-content p a, .inner-page-content ul > li > a{
+  color: var(--color-orange);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.inner-page-content ul {
+  padding-left: 2rem;
+  margin: 0;
+}
+.inner-page-content ul li:before {
+  content: "\25BA";
+  color: var(--color-orange);
+  font-size: 0.8em;
+  margin-right: 8px;
+  margin-top: 0.25em;
+  flex-shrink: 0;
 }
