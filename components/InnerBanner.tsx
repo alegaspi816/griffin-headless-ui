@@ -22,7 +22,7 @@ export default function BannerDefault({
   type = "page",
 }: BannerProps) {
   const bannerImage =
-    image || "https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2025/09/arizona-skyline-e1757520675891.jpg";
+    image || "https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2026/04/arizona-skyline-e1757520675891.webp";
 
   const renderTitle = () => {
     if (title) return title;
