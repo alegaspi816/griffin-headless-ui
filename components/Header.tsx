@@ -7,9 +7,9 @@ import Image from "next/image";
 export default function Navbar({ menuItems = [] }: { menuItems?: any[] }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log("Navbar Received Menu Items:", menuItems);
-  }, [menuItems]);
+  }, [menuItems]);*/
 
   useEffect(() => {
     const handleScroll = () => {

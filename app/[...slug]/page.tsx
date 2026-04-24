@@ -171,8 +171,6 @@ export default async function Page({
   // BUILD FULL URI
   const uri = `/${slug.join("/")}/`;
 
-  console.log("Fetching URI:", uri); // CONSOLE LOG
-
   const page = await getPage(uri);
 
   if (!page) notFound();
