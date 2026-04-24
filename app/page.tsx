@@ -130,7 +130,7 @@ export default async function Home() {
     <div>
       {/* BANNER SECTION */}
       <section className="home-banner relative isolate overflow-hidden bg-cover bg-center py-24 sm:py-32">
-        <Image src={banner?.bannerBackground?.node?.sourceUrl || 'https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2025/09/arizona-skyline-e1757520675891.jpg'} alt="Banner Background" fill priority className="object-cover -z-10" sizes="100vw" quality={75} />
+        <Image src={banner?.bannerBackground?.node?.sourceUrl || 'https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2026/04/arizona-skyline-e1757520675891.webp'} alt="Banner Background" fill priority className="object-cover -z-10" sizes="100vw" quality={75} />
         <div className="banner-overlay absolute inset-0 bg-black/40"></div>
         <div className="home-banner-cont relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto lg:mx-0">
