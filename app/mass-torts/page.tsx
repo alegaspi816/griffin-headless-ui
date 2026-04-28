@@ -1,6 +1,8 @@
 import { fetchGraphQL } from "@/lib/api";
 import PracticeAreasSection from "@/components/PracticeAreasSection";
 import FooterSection from "@/components/FooterSection";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 async function getPracticeAreas() {
   const data = await fetchGraphQL(`
@@ -75,8 +77,10 @@ export default async function MassTortsPage() {
 
   return (
     <>
+      <SiteHeader />
       <PracticeAreasSection data={paLayout} />
       <FooterSection />
+      <SiteFooter />
     </>
   );
 }

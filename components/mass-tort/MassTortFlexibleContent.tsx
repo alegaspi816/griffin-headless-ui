@@ -1,6 +1,8 @@
 "use client";
 
 import CardsLayout from "./layouts/CardsLayout";
+import TwoColLayout from "./layouts/TwoColLayout";
+import CtaLayout from "./layouts/CtaLayout"
 
 export default function MassTortFlexibleContent({
   layouts,
@@ -8,14 +10,16 @@ export default function MassTortFlexibleContent({
   layouts: any[];
 }) {
   if (!layouts) return null;
-
   return (
     <>
       {layouts.map((layout, index) => {
         switch (layout.__typename) {
-          case "Page_Masstorttemplate_MasstortFlexibleContent_CardsLayout":
+          case "MassTortTemplateMassTortFlexibleContentCardsLayoutLayout":
             return <CardsLayout key={index} data={layout} />;
-
+          case "MassTortTemplateMassTortFlexibleContentTwoColLayoutLayout":
+            return <TwoColLayout key={index} data={layout} />;
+          case "MassTortTemplateMassTortFlexibleContentCtaLayoutLayout":
+            return <CtaLayout key={index} data={layout} />;
           default:
             return null;
         }

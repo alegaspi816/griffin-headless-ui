@@ -99,7 +99,12 @@ import { mapBannerData } from "@/lib/api";
 import DefaultBanner from "@/components/InnerBanner";
 import FooterSection from "@/components/FooterSection";
 import Sidebar from "@/components/Sidebar";
+import MassTortHeader from "@/components/mass-tort/MassTortHeader";
 import MassTortPage from "@/components/templates/MassTortPage";
+import MassTortFooter from "@/components/mass-tort/MassTortFooter";
+import PageShell from "@/components/PageShell";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 async function getPage(uri: string) {
   const data = await fetchGraphQL(
@@ -124,6 +129,7 @@ async function getPage(uri: string) {
                 bannerTitle
                 bannerDescription
                 overlayColor
+                landbotScript
                 bannerBackgroundImage {
                   node {
                     sourceUrl
@@ -133,7 +139,6 @@ async function getPage(uri: string) {
 
               massTortFlexibleContent {
                 __typename
-
                 ... on MassTortTemplateMassTortFlexibleContentCardsLayoutLayout {
                   darkBackground
                   sectionTitle
@@ -141,12 +146,46 @@ async function getPage(uri: string) {
                   cardsRepeater {
                     cardTitle
                     cardContent
+                    cardBgImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
                     cardLink {
                       title
                       url
                     }
                   }
                   lowerContent
+                }
+                ... on MassTortTemplateMassTortFlexibleContentTwoColLayoutLayout {
+                  content
+                  contentRight
+                  darkBackground
+                  bgPositionMobile
+                  bgPositionDesktop
+                  sectionImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                }
+                ... on MassTortTemplateMassTortFlexibleContentCtaLayoutLayout {
+                  alignCenter
+                  contentRight
+                  ctaButton {
+                    url
+                    title
+                  }
+                  h2Title
+                  overlayColor
+                  sectionContent
+                  sectionTitle
+                  backgroundImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
                 }
               }
             }
@@ -176,10 +215,16 @@ export default async function Page({
   if (!page) notFound();
 
   const massTortData = page?.template?.massTortTemplate;
-
-  //  MASS TORT TEMPLATE
+  
   if (massTortData) {
-    return <MassTortPage data={massTortData} />;
+    return (
+      <PageShell
+        header={<MassTortHeader />}
+        footer={<MassTortFooter />}
+      >
+        <MassTortPage data={massTortData} />
+      </PageShell>
+    );
   }
 
   //  DEFAULT TEMPLATE
@@ -187,6 +232,7 @@ export default async function Page({
 
   return (
     <>
+      <SiteHeader />
       <DefaultBanner {...banner} fallbackTitle={page.title} type="page" />
 
       <article className="inner-page article max-w-7xl mx-auto py-12 px-4 flex flex-col min-[992px]:flex-row gap-8">
@@ -199,27 +245,17 @@ export default async function Page({
 
           {page?.featuredImage?.node?.sourceUrl && (
             <div className="mb-10 overflow-hidden rounded-lg shadow-lg">
-              <Image
-                src={page.featuredImage.node.sourceUrl}
-                alt={page.featuredImage.node.altText || page.title}
-                width={1200}
-                height={600}
-                className="w-full h-auto object-cover"
-                priority
-              />
+              <Image src={page.featuredImage.node.sourceUrl} alt={page.featuredImage.node.altText || page.title} width={1200} className="w-full h-auto object-cover" priority />
             </div>
           )}
-
-          <div
-            className="prose prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: page.content }}
-          />
+          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: page.content }} />
         </div>
 
         <Sidebar />
       </article>
 
       <FooterSection />
+      <SiteFooter />
     </>
   );
 }

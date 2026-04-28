@@ -105,10 +105,6 @@ header.header nav.fixed{
   top: -2px;
 }
 
-
-
-
-
 .close-menu, .open-menu {
   position: absolute;
   cursor: pointer;
@@ -146,6 +142,9 @@ header.header nav.fixed{
   color: #fff;
 }
 
+
+
+/* Homepage styles */
 .bg-overlay:after {
   content: "";
   position: absolute;
@@ -196,6 +195,7 @@ header.header nav.fixed{
 
 #footer-contact {padding: 50px 15px;}
 .footer-contact .title {
+  color: #fff;
   font-family: var(--font-secondary);
   font-size: 2.5rem;
   line-height: 1.1;
@@ -385,3 +385,5 @@ header.header nav.fixed{
   margin-top: 0.25em;
   flex-shrink: 0;
 }
+
+

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FooterSection from "@/components/FooterSection";
 import PracticeAreasSection from "@/components/PracticeAreasSection";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 async function getHomePage() {
   const data = await fetchGraphQL(`
@@ -128,6 +130,7 @@ export default async function Home() {
 
   return (
     <div>
+      <SiteHeader />
       {/* BANNER SECTION */}
       <section className="home-banner relative isolate overflow-hidden bg-cover bg-center py-24 sm:py-32">
         <Image src={banner?.bannerBackground?.node?.sourceUrl || 'https://griffinheadlesscms.kinsta.cloud/wp-content/uploads/2026/04/arizona-skyline-e1757520675891.webp'} alt="Banner Background" fill priority className="object-cover -z-10" sizes="100vw" quality={75} />
@@ -170,6 +173,7 @@ export default async function Home() {
     {paLayout && <PracticeAreasSection data={paLayout} />}
      
     <FooterSection />
+    <SiteFooter />
 
     </div>
   );
