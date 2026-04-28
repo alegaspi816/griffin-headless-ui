@@ -106,6 +106,22 @@ import PageShell from "@/components/PageShell";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
+async function getMassTortLegalContent() {
+  const data = await fetchGraphQL(
+    `
+    query GetMassTortLegalContent {
+      privacyPolicyPage: page(id: 66, idType: DATABASE_ID) {
+        content
+      }
+    }
+  `
+  );
+
+  return {
+    privacyPolicyContent: data?.privacyPolicyPage?.content || "",
+  };
+}
+
 async function getPage(uri: string) {
   const data = await fetchGraphQL(
     `
@@ -217,10 +233,12 @@ export default async function Page({
   const massTortData = page?.template?.massTortTemplate;
   
   if (massTortData) {
+    const legalContent = await getMassTortLegalContent();
+
     return (
       <PageShell
         header={<MassTortHeader />}
-        footer={<MassTortFooter />}
+        footer={<MassTortFooter privacyPolicyContent={legalContent.privacyPolicyContent} />}
       >
         <MassTortPage data={massTortData} />
       </PageShell>
