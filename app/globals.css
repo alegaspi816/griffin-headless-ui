@@ -34,6 +34,7 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+.font-secondary{font-family: var(--font-secondary);}
 
 .btn-primary {
   background: var(--color-primary);
