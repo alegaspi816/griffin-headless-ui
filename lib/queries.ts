@@ -15,3 +15,21 @@ export const GET_ALL_TESTIMONIALS = `
     }
   }
 `;
+
+export const GET_ALL_RESULTS = `
+  query GetAllResults {
+    results {
+      nodes {
+        id
+        title
+        content
+        date
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
