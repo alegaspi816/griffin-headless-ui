@@ -1,3 +1,4 @@
+import SidebarForm from "@/components/SidebarForm";
 
 export default async function Sidebar() {
     return (
@@ -25,6 +26,13 @@ export default async function Sidebar() {
                     ))}
                 </div>
             </div>
+                    
+            <div className="sidebar-form bg-[#1c302a] shadow-2xl mt-8 rounded-xl border border-white/10 p-6 md:p-8 sticky top-[150px]">
+            <span className="sidebar-form-title font-secondary d-block text-3xl font-serif mb-8 block">Contact Us</span>
+                <SidebarForm />
+            </div>
+            
+
         </aside>
     );
 }

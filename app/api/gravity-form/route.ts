@@ -1,13 +1,14 @@
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const formId = body.formId === 2 ? 2 : 1;
 
     const credentials = Buffer.from(
       `${process.env.GF_CONSUMER_KEY}:${process.env.GF_CONSUMER_SECRET}`
     ).toString("base64");
 
     const res = await fetch(
-      "https://griffinheadlesscms.kinsta.cloud/wp-json/gf/v2/forms/1/submissions",
+      `https://griffinheadlesscms.kinsta.cloud/wp-json/gf/v2/forms/${formId}/submissions`,
       {
         method: "POST",
         headers: {
@@ -31,7 +32,7 @@ export async function POST(req: Request) {
     try {
       const data = JSON.parse(responseText);
       return Response.json(data);
-    } catch (parseError) {
+    } catch {
       console.error("WordPress returned non-JSON response:", responseText);
       return Response.json(
         { error: "Invalid JSON from WordPress", raw: responseText },

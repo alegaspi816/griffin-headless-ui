@@ -386,5 +386,6 @@ header.header nav.fixed{
   margin-top: 0.25em;
   flex-shrink: 0;
 }
+.sidebar-form .sidebar-form-title{color: #fff;}
 
 
