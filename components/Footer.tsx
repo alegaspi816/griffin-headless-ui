@@ -39,9 +39,7 @@ export default function Footer({ menuItems = [] }: { menuItems?: any[] }) {
                     </svg>
                   </span>
 
-                  <a href="mailto:contact@griffinlawplc.com" className="hover:opacity-80">
-                    contact@griffinlawplc.com
-                  </a>
+                  <a href="mailto:contact@griffinlawplc.com" className="hover:opacity-80">contact@griffinlawplc.com</a>
                 </li>
               </ul>
             </div>

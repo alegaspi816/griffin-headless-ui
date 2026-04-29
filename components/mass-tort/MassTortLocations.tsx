@@ -21,15 +21,10 @@ const MassTortLocations = () => {
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         
         {/* Header Section */}
-        <span className="sub-title block text-xs font-bold tracking-widest text-gray-500 uppercase mb-3">
-          Locations
-        </span>
-        <h2 className="title text-4xl md:text-5xl font-serif text-[#1c302a] leading-tight mb-12 max-w-3xl">
-          Our Best-In-Class Personal Injury Lawyers Have Proudly Served Arizona
-        </h2>
+        <span className="sub-title block text-xs font-bold tracking-widest text-gray-500 uppercase mb-3">Locations</span>
+        <h2 className="title text-4xl md:text-5xl font-serif text-[#1c302a] leading-tight mb-12 max-w-3xl">Our Best-In-Class Personal Injury Lawyers Have Proudly Served Arizona</h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
           {/* LEFT: Location Pills (col-md-5 equivalent) */}
           <div className="lg:col-span-5">
             <div className="flex flex-col space-y-4" role="tablist">
@@ -38,13 +33,7 @@ const MassTortLocations = () => {
                 
                 return (
                   <div key={loc.id} className="border-t border-gray-200 first:border-t-0">
-                    <button
-                      onClick={() => setActiveTab(loc.id)}
-                      className={`nav-link w-full text-left py-6 transition-all duration-300 focus:outline-none group`}
-                      type="button"
-                      role="tab"
-                      aria-selected={isActive}
-                    >
+                    <button onClick={() => setActiveTab(loc.id)} className={`nav-link w-full text-left py-6 transition-all duration-300 focus:outline-none group`} type="button" role="tab" aria-selected={isActive}>
                       <h5 className="location-title relative flex items-center justify-between font-serif text-2xl text-[#1c302a] pr-8">
                         {loc.title}
                         

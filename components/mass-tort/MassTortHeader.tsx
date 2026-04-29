@@ -10,16 +10,11 @@ const MassTortHeader = () => {
             
             {/* Logo Section */}
             <div className="navbar-brand flex items-center">
-                <Image src="/griffin-plc.png" alt="Griffin Law, PLC" className="logo-image" width={150} height={50} priority />
+              <Image src="/griffin-plc.png" alt="Griffin Law, PLC" className="logo-image" width={150} height={50} priority />
             </div>
 
             {/* CTA Button */}
-            <Link 
-              href="#take-the-quiz"
-              className="call-button bg-[#d9f99d] text-[#1c302a] px-4 py-2 md:px-6 md:py-2.5 rounded font-bold uppercase text-[10px] md:text-xs tracking-widest hover:bg-white transition-colors duration-300"
-            >
-              Free Consultation
-            </Link>
+            <Link href="#take-the-quiz" className="call-button bg-[#d9f99d] text-[#1c302a] px-4 py-2 md:px-6 md:py-2.5 rounded font-bold uppercase text-[10px] md:text-xs tracking-widest hover:bg-white transition-colors duration-300">Free Consultation</Link>
 
           </div>
         </div>

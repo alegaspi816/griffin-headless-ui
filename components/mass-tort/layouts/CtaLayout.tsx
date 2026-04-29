@@ -19,30 +19,20 @@ export default function CtaLayout({ data }: { data: any }) {
             <div className="container mx-auto px-4 relative z-10 max-w-7xl">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
                 
-                {/* Text Column (col-lg-8 equivalent) */}
-                <div className="w-full lg:w-2/3 text-left">
-                    <h2 className="cta-title font-serif text-3xl md:text-4xl font-medium mb-6 leading-tight">
-                    {data.sectionTitle}
-                    </h2>
-                    
-                    {data.sectionContent && (
-                    <div  className="cta-desc text-base md:text-lg leading-relaxed opacity-90 space-y-4 max-w-3xl"
-                        dangerouslySetInnerHTML={{ __html: data.sectionContent }} 
-                    />
-                    )}
-                </div>
+                    <div className="w-full lg:w-2/3 text-left">
+                        {data.sectionTitle && (
+                            <h2 className="cta-title font-serif text-3xl md:text-4xl font-medium mb-6 leading-tight">{data.sectionTitle}</h2>
+                        )}
+                        {data.sectionContent && (
+                            <div  className="cta-desc text-base md:text-lg leading-relaxed opacity-90 space-y-4 max-w-3xl" dangerouslySetInnerHTML={{ __html: data.sectionContent }} />
+                        )}
+                    </div>
 
-                {/* Button Column (col-lg-4 equivalent) */}
-                <div className="cta-btn-cont w-full lg:w-1/3 flex justify-center lg:justify-end">
                     {data.ctaButton && (
-                    <Link
-                        href={data.ctaButton.url || "#"}
-                        className="cta-button inline-block bg-[#d9f99d] text-[#1c302a] px-8 py-4 rounded-md font-bold text-sm tracking-widest uppercase hover:bg-white transition-colors duration-300 shadow-lg text-center min-w-[280px]"
-                    >
-                        {data.ctaButton.title}
-                    </Link>
+                        <div className="cta-btn-cont w-full lg:w-1/3 flex justify-center lg:justify-end">
+                            <Link href={data.ctaButton.url || "#"} className="cta-button inline-block bg-[#d9f99d] text-[#1c302a] px-8 py-4 rounded-md font-bold text-sm tracking-widest uppercase hover:bg-white transition-colors duration-300 shadow-lg text-center min-w-[280px]">{data.ctaButton.title}</Link>
+                        </div>
                     )}
-                </div>
 
                 </div>
             </div>
