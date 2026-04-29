@@ -7,10 +7,6 @@ import Image from "next/image";
 export default function Navbar({ menuItems = [] }: { menuItems?: any[] }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  /*useEffect(() => {
-    console.log("Navbar Received Menu Items:", menuItems);
-  }, [menuItems]);*/
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -35,7 +31,7 @@ export default function Navbar({ menuItems = [] }: { menuItems?: any[] }) {
             
             {menuItems.length === 0 && (<li className="text-red-500">Menu not found in WordPress</li>)}
 
-            {menuItems.map((item, index) => { // 1. Added index here
+            {menuItems.map((item, index) => {
               const hasChildren = item.children?.length > 0;
 
               if (!hasChildren) {
@@ -46,12 +42,10 @@ export default function Navbar({ menuItems = [] }: { menuItems?: any[] }) {
 
               return (
                 <li key={item.id} className="dropdown-parent">
-                  {/* 2. Use a sanitized ID using the index */}
                   <input type="checkbox" id={`sub-check-${index}`} className="hidden" />
 
                   <div className="flex items-center">
                     <Link href={item.uri}>{item.label}</Link>
-                    {/* 3. Match the htmlFor to the sanitized ID */}
                     <label htmlFor={`sub-check-${index}`} className="chevron-icon cursor-pointer ml-1">
                       <svg className="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />

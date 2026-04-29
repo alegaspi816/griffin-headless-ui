@@ -387,5 +387,6 @@ header.header nav.fixed{
   flex-shrink: 0;
 }
 .sidebar-form .sidebar-form-title{color: #fff;}
-
-
+aside.sidebar .sidebar-menu-title, aside.sidebar nav#practice-areas-nav ul#practice-areas-menu li a span{color: var(--color-primary);}
+aside.sidebar nav#practice-areas-nav ul#practice-areas-menu li a span{transition: 0.4s;}
+aside.sidebar nav#practice-areas-nav ul#practice-areas-menu li a span:hover{color: var(--color-orange);}
