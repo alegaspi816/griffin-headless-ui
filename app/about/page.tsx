@@ -19,7 +19,7 @@ export default async function ContactUsPage() {
                 <p className="home-banner-pretitle font-bold mb-2 uppercase">More Than a Law Firm. We're Your Advocates.</p>
                 <span className="home-banner-title text-5xl font-semibold tracking-tight text-white sm:text-7xl">About Griffin Law, PLC</span>
                 <div  className="home-banner-desc mt-8 text-lg max-w-2xl font-medium text-pretty text-white sm:text-xl/8"/>At Griffin Law, PLC, we believe effective legal representation is built on a foundation of trust, compassion, and an unwavering commitment to our clients' well-being. We don't just see a case; we see a person in need of a champion, and we are here to fight for you every step of the way.</div>
-            <Link href="#schedula-a-free-consultation" className="btn-primary uppercase inline-block mt-10">Free Consultation</Link>
+            <Link href="#footer-contact" className="btn-primary uppercase inline-block mt-10">Free Consultation</Link>
             </div>
         </section>
 

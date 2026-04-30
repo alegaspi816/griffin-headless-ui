@@ -54,7 +54,6 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
                             &mdash; {typeof node.title === 'string' ? node.title : node.title?.rendered}
                         </span>
 
-                        {/* Hardcoded 5-star Rating - Matching the orange in image */}
                         <div className="testimonial-rating flex flex-row gap-0.5">
                             {[...Array(5)].map((_, i) => (
                             <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20" height="20" fill="#f48120">
